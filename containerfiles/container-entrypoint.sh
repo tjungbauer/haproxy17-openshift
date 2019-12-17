@@ -93,7 +93,7 @@ then
   sed -e "s/server_lines/${server_lines}/" /usr/local/etc/haproxy/haproxy.conf.template > ${CONFIG_FILE}
 
   if [[ $MOD_HEADERS != "" ]]; then
-    add_headers="http-request set-header X-Custom-Header %[url_port]"
+    add_headers="http-request set-header X-Custom-Header %[url]"
   else
     add_headers=""
   fi
