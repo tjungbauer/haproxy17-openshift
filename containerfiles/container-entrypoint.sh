@@ -79,7 +79,13 @@ if [[ -z "${CONFIG_FILE}" ]];
 then
   counter=0
   for i in $( echo ${SERVICE_DEST}| sed -e 's/;/ /g') ; do
-    server_lines=${server_lines}$(echo -e server "${SERVICE_NAME}_"$(printf "%03i" "$counter") ${i}:${SERVICE_DEST_PORT} check \\\\\n)
+    if [[ $SERVICE_DEST == *":"* ]]; then
+      $SERVICE_PORT="" 
+    else 
+      $SERVICE_PORT=":80"
+    fi
+    #server_lines=${server_lines}$(echo -e server "${SERVICE_NAME}_"$(printf "%03i" "$counter") ${i}:${SERVICE_DEST_PORT} check \\\\\n)
+    server_lines=${server_lines}$(echo -e server "${SERVICE_NAME}_"$(printf "%03i" "$counter") ${i}${SERVICE_PORT} check \\\\\n)
     let "counter++"
   done
   CONFIG_FILE=/tmp/haproxy.conf
