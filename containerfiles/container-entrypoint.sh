@@ -102,6 +102,13 @@ fi
 
 echo "using CONFIG_FILE   :"${CONFIG_FILE}
 
+echo "Loaded env:"
+echo `env`
+
+echo "Loaded configuration"
+LOAD=`cat ${CONFIG_FILE}`
+echo $LOAD
+
 echo "starting socklog"
 /usr/local/bin/socklog unix /tmp/haproxy_syslog &
 
