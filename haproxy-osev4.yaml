@@ -59,6 +59,10 @@ objects:
             value: "${SERVICE_TCP_PORT}"
           - name: STATS_PASSWORD
             value: "${STATS_PASSWORD}"
+          - name: BALANCE_TYPE
+            value: "${BALANCE_TYPE}"
+          - name: MOD_HEADERS
+            value: "${MOD_HEADERS}"
           image: docker.io/tjungbauer/haproxy17:latest
           imagePullPolicy: Always
           name: ${PROXY_SERVICE}
@@ -176,4 +180,11 @@ parameters:
 - description: The port for the HAProxy Exporter for Prometheus
   name: SCRAPER_TCP_PORT
   value: "9101"
+- description: "Modify header and add url_port (any value or empty string)"
+  name: MOD_HEADERS
+  value: ""
+- description: "Type of loadbalancing"
+  name: BALANCE_TYPE
+  value: "roundrobin"
+
 

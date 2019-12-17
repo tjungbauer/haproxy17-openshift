@@ -91,6 +91,13 @@ then
   CONFIG_FILE=/tmp/haproxy.conf
   # ${server_lines}
   sed -e "s/server_lines/${server_lines}/" /usr/local/etc/haproxy/haproxy.conf.template > ${CONFIG_FILE}
+
+  if [[ $MOD_HEADERS != "" ]]; then
+    add_headers="http-request set-header X-Custom-Header %[url_port]"
+  else
+    add_headers=""
+  fi
+  sed -e "s/add_headers/${add_headers}/" /usr/local/etc/haproxy/haproxy.conf.template > ${CONFIG_FILE}
 fi
 
 echo "using CONFIG_FILE   :"${CONFIG_FILE}

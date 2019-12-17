@@ -60,8 +60,9 @@ frontend public_tcp
 
 
 backend be_generic_tcp
+  add_headers
   mode http
-  balance roundrobin
+  balance "{BALANCE_TYPE}"
   timeout check 5s
 
 #  server "${SERVICE_NAME}" ${SERVICE_DEST_IP}:${SERVICE_DEST_PORT} check inter 5000ms
