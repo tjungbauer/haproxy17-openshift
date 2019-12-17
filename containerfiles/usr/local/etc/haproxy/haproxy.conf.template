@@ -66,4 +66,4 @@ backend be_generic_tcp
 
 #  server "${SERVICE_NAME}" ${SERVICE_DEST_IP}:${SERVICE_DEST_PORT} check inter 5000ms
   server_lines
-${SERVER_LINES}
+"${SERVER_LINES}"
