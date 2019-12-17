@@ -180,7 +180,7 @@ parameters:
 - description: The port for the HAProxy Exporter for Prometheus
   name: SCRAPER_TCP_PORT
   value: "9101"
-- description: "Modify header and add url_port (any value or empty string)"
+- description: "Modify header and add url_port"
   name: MOD_HEADERS
   value: ""
 - description: "Type of loadbalancing"
