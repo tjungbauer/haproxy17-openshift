@@ -43,7 +43,7 @@ objects:
             value: "${TZ}"
           - name: SCRAPER_TCP_PORT
             value: "${SCRAPER_TCP_PORT}"
-          image: docker.io/me2digital/haproxy17:latest
+          image: docker.io/tjungbauer/haproxy17:latest
           imagePullPolicy: Always
           name: haproxy-exporter
           ports:
@@ -74,7 +74,7 @@ objects:
             value: "${STATS_USER}"
           - name: TZ
             value: "${TZ}"
-          image: docker.io/me2digital/haproxy17:latest
+          image: docker.io/tjungbauer/haproxy17:latest
           imagePullPolicy: Always
           name: ${PROXY_SERVICE}
           ports:
