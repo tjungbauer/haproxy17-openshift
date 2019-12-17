@@ -31,21 +31,14 @@ objects:
       spec:
         containers:
         - env:
-          - name: DEBUG
-            value: "${DEBUG}"
           - name: STATS_PASSWORD
             value: "${STATS_PASSWORD}"
-          - name: STATS_PORT
-            value: "${STATS_PORT}"
-          - name: STATS_USER
-            value: "${STATS_USER}"
-          - name: TZ
-            value: "${TZ}"
-          - name: SCRAPER_TCP_PORT
-            value: "${SCRAPER_TCP_PORT}"
           image: docker.io/tjungbauer/haproxy17:latest
           imagePullPolicy: Always
           name: haproxy-exporter
+          envFrom:
+            - configMapRef:
+                name: ${PROXY_SERVICE}-cm
           ports:
           - containerPort: ${{SCRAPER_TCP_PORT}}
             protocol: TCP
@@ -56,8 +49,6 @@ objects:
           resources: {}
           terminationMessagePath: /dev/termination-log
         - env:
-          - name: DEBUG
-            value: "${DEBUG}"
           - name: SERVICE_DEST
             value: ${SERVICE_DEST}
           - name: SERVICE_DEST_PORT
@@ -68,15 +59,12 @@ objects:
             value: "${SERVICE_TCP_PORT}"
           - name: STATS_PASSWORD
             value: "${STATS_PASSWORD}"
-          - name: STATS_PORT
-            value: "${STATS_PORT}"
-          - name: STATS_USER
-            value: "${STATS_USER}"
-          - name: TZ
-            value: "${TZ}"
           image: docker.io/tjungbauer/haproxy17:latest
           imagePullPolicy: Always
           name: ${PROXY_SERVICE}
+          envFrom:
+            - configMapRef:
+                name: ${PROXY_SERVICE}-cm
           ports:
           - containerPort: ${{SERVICE_TCP_PORT}}
             protocol: TCP
@@ -108,6 +96,16 @@ objects:
     type: ClusterIP
   status:
     loadBalancer: {}
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: ${PROXY_SERVICE}-cm
+  data:
+    DEBUG: "${DEBUG}"
+    SCRAPER_TCP_PORT: "${SCRAPER_TCP_PORT}"
+    STATS_PORT: "${STATS_PORT}"
+    STATS_USER: "${STATS_USER}"
+    TZ: "${TZ}"
 - apiVersion: v1
   kind: Service
   metadata:
