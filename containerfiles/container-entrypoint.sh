@@ -98,7 +98,7 @@ then
     IFS=$'\n'
     for i in $( echo ${MOD_HEADERS}| sed -e 's/;/ /g') ; do
 
-      add_headers=${add_header}$(echo -e "${i}" \\\\\n)
+      add_headers=${add_headers}$(echo -e "${i}" \\\\\n)
       let "counter++"
     done
     unset IFS
