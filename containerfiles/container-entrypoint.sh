@@ -93,13 +93,11 @@ then
   sed -e "s/server_lines/${server_lines}/" /usr/local/etc/haproxy/haproxy.conf.template > ${CONFIG_FILE}
 
   if [[ $MOD_HEADERS != "" ]]; then
-    counter=0
     # we need to set delimiter for "for-loop" to \n
-    IFS=$'\n'
+    IFS=:
     for i in $( echo ${MOD_HEADERS}| sed -e 's/;/ /g') ; do
 
       add_headers=${add_headers}$(echo -e "${i}" \\\\\n)
-      let "counter++"
     done
     unset IFS
   else
