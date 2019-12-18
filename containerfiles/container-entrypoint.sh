@@ -94,11 +94,14 @@ then
 
   if [[ $MOD_HEADERS != "" ]]; then
     counter=0
+    # we need to set delimiter for "for-loop" to \n
+    IFS=$'\n'
     for i in $( echo ${MOD_HEADERS}| sed -e 's/;/ /g') ; do
 
       add_headers=${add_header}$(echo -e "${i}" \\\\\n)
       let "counter++"
     done
+    unset IFS
   else
     add_headers=""
   fi
