@@ -94,8 +94,8 @@ then
 
   if [[ $MOD_HEADERS != "" ]]; then
     # we need to set delimiter for "for-loop" to \n
-    IFS=:
-    for i in $( echo ${MOD_HEADERS}| sed -e 's/;/ /g') ; do
+    IFS='\n'
+    for i in $( echo ${MOD_HEADERS}| sed -e 's/;/\n/g') ; do
 
       add_headers=${add_headers}$(echo -e "${i}" \\\\\n)
     done
